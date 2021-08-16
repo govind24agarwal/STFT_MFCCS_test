@@ -79,5 +79,24 @@ plt.ylabel("Frequency")
 plt.colorbar(format="%+2.0f db")
 plt.title("Spectrogram (dB)")
 
+
+"""
+===========================================
+Short Term Fourier Transform (Spectrogram)
+===========================================
+"""
+# extract 13 MFCCs
+MFCCs = librosa.feature.mfcc(
+    signal, sr, n_fft=n_fft, hop_length=hop_length, n_mfcc=13)
+
+# display MFCCs
+plt.figure(figsize=FIG_SIZE)
+librosa.display.specshow(MFCCs, sr=sr, hop_length=hop_length)
+plt.xlabel("Time")
+plt.ylabel("MFCC coefficients")
+plt.colorbar()
+plt.title("MFCCs")
+
+
 # show plot
 plt.show()
