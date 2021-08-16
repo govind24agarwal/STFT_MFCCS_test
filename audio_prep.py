@@ -45,5 +45,39 @@ plt.xlabel("Frequency")
 plt.ylabel("Magnitude")
 plt.title("Power spectrum")
 
+
+"""
+===========================================
+Short Term Fourier Transform (Spectrogram)
+===========================================
+"""
+hop_length = 512
+n_fft = 2048
+
+# perform stft
+stft = librosa.stft(signal, n_fft=n_fft, hop_length=hop_length)
+
+# Get magnitude from complex values
+spectrogram = np.abs(stft)
+
+# display spectrogram
+plt.figure(figsize=FIG_SIZE)
+librosa.display.specshow(spectrogram, sr=sr, hop_length=hop_length)
+plt.xlabel("Time")
+plt.ylabel("Frequency")
+plt.colorbar()
+plt.title("Spectrogram")
+
+# applying logarithm to cast amplitudeto dB
+log_spectrogram = librosa.amplitude_to_db(spectrogram)
+
+# display spectrogramwithmagnitudes in Decibels
+plt.figure(figsize=FIG_SIZE)
+librosa.display.specshow(log_spectrogram, sr=sr, hop_length=hop_length)
+plt.xlabel("Time")
+plt.ylabel("Frequency")
+plt.colorbar(format="%+2.0f db")
+plt.title("Spectrogram (dB)")
+
 # show plot
 plt.show()
